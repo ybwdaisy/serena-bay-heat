@@ -1,1 +1,6 @@
-[{"name":"1-cover.jpg","query":"?shot=cover&seed=7"},{"name":"2-drive.jpg","query":"?shot=drive&seed=7"},{"name":"3-foot.jpg","query":"?shot=foot&seed=7"},{"name":"4-chase.jpg","query":"?shot=chase&seed=7"}]
+[
+  {"name": "1-cover.jpg", "query": "?shot=cover&seed=7", "caption": "Cover: police chase with mission HUD, wanted stars and minimap"},
+  {"name": "2-drive.jpg", "query": "?shot=drive&seed=7", "caption": "Driving downtown Serena Bay in the gold coupe"},
+  {"name": "3-foot.jpg", "query": "?shot=foot&seed=7", "caption": "On foot in Market Square, pedestrians and storefronts"},
+  {"name": "4-chase.jpg", "query": "?shot=chase&seed=7", "caption": "Police shootout on the beach at four wanted stars"}
+]
