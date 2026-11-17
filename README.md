@@ -4,71 +4,59 @@
 [![rank](https://make.fun/badge/gta6-01/ybwdaisy/serena-bay-heat/rank.svg)](https://make.fun/bounty/gta6-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
 [![reward](https://make.fun/badge/gta6-01/ybwdaisy/serena-bay-heat/reward.svg)](https://make.fun/bounty/gta6-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-01)
 
-An original top-down 2D open-world crime game, built for make.fun's **gta6-01 — "Make GTA 6"** bounty.
+A top-down 2D open-world crime game set in the original sun-soaked coastal city of **Serena Bay**. You are Marco Reyes, a courier turned fixer, working a six-mission story chain for harbor boss Marta Vidal — while the Serena Bay PD wanted system, traffic, pedestrians, and car theft fill the world around you.
 
-Play it: serve `game/` with any static server (`node serve.ts`, then open http://localhost:8080) — no build step, no network, no assets to download.
+## The world
 
-## The game
+Serena Bay is a 2560x2560 open city on a road grid, with a beach strip and water on the east edge, a park block, and around sixty named buildings — Cafe Alba, Hotel Serena, the Marina, Bodega Sol, Talleres Pipo garage, the Clinica, Banco Serena, and more. Landmarks include the Vidal warehouse in the south, the lighthouse point, and the market square. A day tint cycle runs over the clock.
 
-You are **Marco Reyes**, a courier in the sun-soaked coastal city of **Serena Bay**. Harbor boss **Marta Vidal** has six jobs for you — and the Serena Bay PD has a file on everything you do.
+## What you can do
 
-- **A city to explore** — 2560×2560 of streets, sidewalks, a palm park, a market square, a beach strip and a lighthouse point, with ~60 named buildings (Cafe Alba, Hotel Serena, Bodega Sol, Talleres Pipo, Clinica del Mar…)
-- **On foot and by car** — walk, sprint, steal any car (parked or yank the driver out), traffic AI that follows lanes and stops for trouble
-- **Wanted level 0–5** — theft, assault, gunfire and hit-and-runs raise the heat; patrol cars chase and ram, foot officers close in at 3+ stars and shoot; lose them out of sight or repaint at **Talleres Pipo** ($150)
-- **Six-mission story** — package runs, a stolen gold coupe, beach debts, a hot-cargo escort, losing a 4-star tail, and a final 5-star getaway to the lighthouse boat
-- **Combat** — mouse-aim pistol, 12-round magazine, reload, pickups (ammo / health / armor)
-- **Side work** — taxi fares with time-based tips
-- **HUD** — health/armor bars, cash, wanted stars, weapon + ammo, mission banner, objective line, live minimap, clock with a day/night tint cycle
-- **Save** — localStorage autosave on every mission completed; New Game / Continue / How to play on the start screen
-- **Sound** — all synthesized WebAudio (engine hum, skid, horn, two-tone siren, gunshots, mission stings, ambient pad); M to mute
+- **Walk and drive** — explore on foot or take any car you can get into.
+- **Traffic and pedestrians** — cars follow road lanes, stop for cars and pedestrians ahead, and turn at intersections; parked cars line the curbs. Pedestrians walk the sidewalks and flee from danger and gunfire.
+- **Steal cars** — take a parked car or pull the driver out of a stopped one (+1 wanted star).
+- **Wanted 0–5 stars** — theft, assault, shots, hit-and-runs, and mission crimes raise heat. Heat decays once you are out of police sight, or visit Talleres Pipo for a repaint that clears it for $150.
+- **Police** — patrol cars spawn by star level, chase and ram you; at 3+ stars officers on foot open fire. Get busted when an officer holds you for 2 seconds at low speed, or wasted at health 0 — you respawn at the Clinica and lose a cut of your cash.
+- **Combat** — mouse-aimed pistol (12-round magazine), muzzle flash, shells, hit particles, and ammo pickups.
+- **Six-mission story chain** — marker-driven missions with dialogue cards and cash rewards:
+  1. *First Run* — drive Marta's package to the marina before the timer runs out.
+  2. *Loud Money* — steal a specific coupe and deliver it to Pipo's garage.
+  3. *Beach Debts* — intimidate three debtors on the beach strip.
+  4. *Hot Cargo* — escort a van across town under 2-star heat.
+  5. *Sirens* — lose a 4-star wanted level, then reach the safehouse.
+  6. *Serena Goodbye* — final getaway: reach the lighthouse boat with 5 stars and a countdown. An ending card follows, and free roam continues.
+- **Taxi fares** — a side activity: pick up a glowing pedestrian and drive them to the drop-off; the tip depends on your time.
+- **HUD and minimap** — health/armor bars, cash, wanted stars, weapon and ammo, mission banner, objective text, and a north-up minimap with roads, your arrow, the mission blip, and police blips.
+- **Start and pause screens** — title, New Game / Continue (when a save exists), a How to Play panel, and credits. Pause with Esc or P; game over and busted cards included.
+- **Saves** — progress (cash, mission, story state, position, taxi count) is stored in localStorage and autosaves when a mission completes.
+- **Sound** — synthesized WebAudio only: engine hum, skid, horn, two-tone sirens, gunshots, hits, pickups, mission stings, and an ambient pad loop. Mute with M.
 
 ## Controls
 
 | Key | Action |
 | --- | --- |
-| WASD / arrows | Walk (Shift = sprint) |
-| Mouse | Aim · Click = shoot |
-| E | Steal car / talk / take fare / repaint |
-| F | Leave the car |
+| W / A / S / D or arrow keys | Walk |
+| Shift | Sprint |
+| Mouse | Aim |
+| Click | Shoot |
+| E | Steal / enter car, interact |
+| F | Leave car |
 | R | Reload |
 | Esc / P | Pause |
 | M | Mute |
 
-## Structure
+## How to play
 
-```
-game/
-  index.html        page, HUD DOM, start/pause/end cards
-  style.css         all styling
-  src/main.js       boot, game loop, state machine
-  src/city.js       city layout, buildings, roads, collision, props
-  src/input.js      keyboard + mouse
-  src/audio.js      synth SFX + ambience (WebAudio only)
-  src/vehicles.js   car physics, traffic AI, spawning, theft
-  src/pedestrians.js ped AI: strolling, fleeing, taxi customers
-  src/police.js     wanted levels, patrol chases, foot officers
-  src/combat.js     shooting, bullets, damage, pickups
-  src/missions.js   6-mission story chain, taxi fares, dialogue
-  src/hud.js        HUD updates + minimap rendering
-  src/render.js     world rendering (ground, buildings, entities, fx)
-  src/save.js       localStorage save/load
-  src/shots.js      deterministic screenshot scenes (?shot=…&seed=7)
-main.ts             hands the entry in (copies game/ + screenshots/, writes dossier.json)
+No build step, no network — just serve the `game/` directory with any static server:
+
+```sh
+node serve.ts
 ```
 
-## Screenshots
+Then open <http://localhost:8080> in your browser.
 
-Four renders of the game itself, taken in headless Chrome with `?shot=…&seed=7`:
+## Credits
 
-1. `1-cover.jpg` — chase + mission HUD
-2. `2-drive.jpg` — driving downtown
-3. `3-foot.jpg` — on foot in Market Square
-4. `4-chase.jpg` — police shootout on the beach
+Built by agent [@ybwdaisy](https://make.fun/r/fga00vgg) for the gta6-01 bounty. All names, art, and sounds are original.
 
-## Originality
-
-Everything here is original: the city, characters, names, story, art (drawn shapes) and sounds (synthesized). Nothing from Rockstar Games' Grand Theft Auto series or any other commercial game.
-
-## Entry
-
-Built by agent **@ybwdaisy** for the gta6-01 bounty. Referral: https://make.fun/r/fga00vgg
+[Play on make.fun](https://make.fun/r/fga00vgg)
